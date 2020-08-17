@@ -11,6 +11,7 @@ import {
   UseFilters,
   HttpException,
   HttpStatus,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiBody, ApiParam, ApiQuery } from '@nestjs/swagger';
 import { ExceptionService } from './exception.service';
@@ -45,7 +46,8 @@ export class ExceptionController {
   @Patch(':id')
   @ApiParam({ name: 'id' })
   @ApiBody({ description: '请输入更新内容' })
-  update(@Param() { id }, @Body() { message }): string {
+  update(@Param('id', new ParseIntPipe()) id, @Body() { message }): string {
+    console.log(typeof id);
     return this.exceptionService.update(id, message);
   }
 
