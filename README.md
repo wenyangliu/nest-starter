@@ -51,7 +51,7 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
   Nest is [MIT licensed](LICENSE).
-  
+
 ## CLI
 ```
 # nest g module hello
@@ -59,5 +59,12 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 # nest g service hello
 
 # nest g controller hello
-```  
-  
+```
+## 提交内容
+
+1. 初始化项目
+
+2. 添加控制器
+
+3. 添加 swagger 文档支持
+
