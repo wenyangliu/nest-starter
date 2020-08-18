@@ -1,7 +1,7 @@
-import * as path from 'path';
+import { resolve } from 'path';
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
+import { ConfigModule, ConfigService } from 'nestjs-config';
 import { MailerModule } from '@nestjs-modules/mailer';
-import { PugAdapter } from '@nestjs-modules/mailer/dist/adapters/pug.adapter';
 import { LoggerMiddleware } from './common/middleware/logger.middleware';
 import { HelloModule } from './modules/hello/hello.module';
 import { ExceptionModule } from './modules/exception/exception.module';
@@ -10,21 +10,10 @@ import { EmailModule } from './modules/email/email.module';
 
 @Module({
   imports: [
+    ConfigModule.load(resolve(__dirname, 'config', '**/!(*.d).{ts,js}')),
     MailerModule.forRootAsync({
-      // *** 代表16位授权码 替换
-      useFactory: () => ({
-        transport: 'smtps://1753439422@qq.com:***@smtp.qq.com',
-        defaults: {
-          from: '"nest-modules" <modules@nestjs.com>',
-        },
-        template: {
-          dir: path.join(__dirname, './templates/email'),
-          adapter: new PugAdapter(),
-          options: {
-            strict: true,
-          },
-        },
-      }),
+      useFactory: (config: ConfigService) => config.get('email'),
+      inject: [ConfigService],
     }),
     HelloModule,
     ExceptionModule,
