@@ -5,6 +5,7 @@ import { MailerModule } from '@nestjs-modules/mailer';
 import { StatusMonitorModule } from 'nest-status-monitor';
 import statusMonitorConfig from './config/statusMonitor';
 import { LoggerMiddleware } from './common/middleware/logger.middleware';
+import { AuthModule } from './modules/auth/auth.module';
 import { HelloModule } from './modules/hello/hello.module';
 import { ExceptionModule } from './modules/exception/exception.module';
 import { RoleGuardModule } from './modules/role-guard/role-guard.module';
@@ -19,9 +20,11 @@ import { EmailModule } from './modules/email/email.module';
       inject: [ConfigService],
     }),
     HelloModule,
+    HelloModule,
     ExceptionModule,
     RoleGuardModule,
     EmailModule,
+    AuthModule,
   ],
 })
 export class AppModule {
