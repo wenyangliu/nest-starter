@@ -13,7 +13,8 @@ import { ExceptionModule } from './modules/exception/exception.module';
 import { RoleGuardModule } from './modules/role-guard/role-guard.module';
 import { EmailModule } from './modules/email/email.module';
 import { UsersModule } from './modules/users/users.module';
-import { TasksModule } from './tasks/tasks.module';
+// import { TasksModule } from './tasks/tasks.module';
+import { AudioModule } from './jobs/audio/audio.module';
 
 @Module({
   imports: [
@@ -35,7 +36,8 @@ import { TasksModule } from './tasks/tasks.module';
     AuthModule,
     UsersModule,
     ScheduleModule.forRoot(),
-    TasksModule,
+    // TasksModule,
+    AudioModule,
   ],
 })
 export class AppModule {
