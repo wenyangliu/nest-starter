@@ -15,6 +15,7 @@ import { EmailModule } from './modules/email/email.module';
 import { UsersModule } from './modules/users/users.module';
 // import { TasksModule } from './tasks/tasks.module';
 import { AudioModule } from './jobs/audio/audio.module';
+import { AlbumModule } from './modules/album/album.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { AudioModule } from './jobs/audio/audio.module';
     ScheduleModule.forRoot(),
     // TasksModule,
     AudioModule,
+    AlbumModule,
   ],
 })
 export class AppModule {
