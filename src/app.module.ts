@@ -1,5 +1,6 @@
 import { resolve } from 'path';
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from 'nestjs-config';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { StatusMonitorModule } from 'nest-status-monitor';
@@ -10,10 +11,15 @@ import { HelloModule } from './modules/hello/hello.module';
 import { ExceptionModule } from './modules/exception/exception.module';
 import { RoleGuardModule } from './modules/role-guard/role-guard.module';
 import { EmailModule } from './modules/email/email.module';
+import { UsersModule } from './modules/users/users.module';
 
 @Module({
   imports: [
     ConfigModule.load(resolve(__dirname, 'config', '**/!(*.d).{ts,js}')),
+    TypeOrmModule.forRootAsync({
+      useFactory: (config: ConfigService) => config.get('database'),
+      inject: [ConfigService],
+    }),
     StatusMonitorModule.setUp(statusMonitorConfig),
     MailerModule.forRootAsync({
       useFactory: (config: ConfigService) => config.get('email'),
@@ -25,6 +31,7 @@ import { EmailModule } from './modules/email/email.module';
     RoleGuardModule,
     EmailModule,
     AuthModule,
+    UsersModule,
   ],
 })
 export class AppModule {
