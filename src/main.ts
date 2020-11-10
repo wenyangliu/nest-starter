@@ -7,6 +7,9 @@ import { ValidationPipe } from './common/pipes/validation.pipe';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  // 开启跨域
+  app.enableCors();
+
   // 全局使用中间件
   // app.use(logger)
 
